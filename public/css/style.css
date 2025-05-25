@@ -1,0 +1,83 @@
+.main-nav{
+    height: 30px;
+    width: 1200px;
+    padding: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+.navbar-brand{
+    font-size: 25px;
+    font-weight: 700;
+    margin-right: 30px;
+}
+
+.auth{
+    margin-left: 450px;
+    font-size: 1.2rem;
+}
+
+.ads{
+    margin-top: 10px;
+}
+
+
+.filtertab{
+    margin-top: 20px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: 25px;
+    font-weight: 500;
+}
+
+.filteritem{
+    color: black !important;
+}
+
+.filteritem:hover{
+    text-decoration: underline;
+}
+
+.course-container{
+    margin-top: 10px;
+    margin-bottom: 40px;
+}
+
+
+/* Footer down */
+
+.f-info-links a {
+    text-decoration: none;
+    color: #222222;
+}
+
+.f-info-links a:hover {
+    text-decoration: underline;
+}
+
+.f-info-links,
+.f-info-socials,
+.f-info-brand {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.f-info-socials i {
+    margin-right: 1rem;
+    font-size: 1.2rem;
+}
+
+.f-info {
+    text-align: center;
+    display: flex;
+    height: 8rem;
+    background-color: rgb(255, 255, 255);
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: space-evenly;
+}
+
+/*  Footer up   */
