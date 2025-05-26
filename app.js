@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const path = require("path");
 const ejsMate = require("ejs-mate");
 const CourseListing = require("./models/course_listing")
+const CourseDetails = require("./models/course_overview")
 
 
 
@@ -74,7 +75,7 @@ app.get("/home/show/:id", async (req, res) => {
     // let { id } = req.params;
 
     try {
-        const Course = await CourseListing.findOne({ _id: req.params.id });
+        const Course = await CourseListing.findOne({ _id: req.params.id }).populate("overview");
 
         if (!Course) {
             return res.redirect("/home"); // Redirect if not found
@@ -87,6 +88,45 @@ app.get("/home/show/:id", async (req, res) => {
     }
 });
 // ----------------------------------------------------------------
+
+// (GET) Course Overview Create Page ------------------------------
+app.get("/home/show/:id/overview", async (req, res) => {
+    res.render("courselisting/courseOverview.ejs", { id: req.params.id });
+});
+// ----------------------------------------------------------------
+
+
+// (POST) Course Overview Post Page ------------------------------
+app.post("/home/show/:id", async (req, res) => {
+    try {
+        const { id } = req.params;
+        const { details } = req.body;
+
+        // Step 1: Create the overview document
+        const overview = new CourseDetails({ details });
+        await overview.save();
+
+        // Step 2: Attach the overview to the course
+        const course = await CourseListing.findById(id);
+        course.overview = overview._id;
+        await course.save();
+
+        // Step 3: Populate the overview before redirecting or rendering
+        // const populatedCourse = await CourseListing.findById(id).populate("overview");
+
+        // Step 4: Redirect or render with the populated course
+        // res.render("some-template.ejs", { course: populatedCourse }); // If rendering
+        res.redirect(`/home/show/${id}`); // If redirecting
+
+        // If you later want to use the populated data, pass it into the render like above
+    } catch (err) {
+        console.error("Error creating overview:", err);
+        res.status(500).send("Something went wrong");
+    }
+});
+
+// ----------------------------------------------------------------
+
 
 
 //  Port connection ------------------------------------------------

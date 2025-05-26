@@ -1,0 +1,25 @@
+<% layout("/layouts/boilerplate") %>
+
+<div class="row mt-3">
+    <div class="col-8 offset-2">
+        <h3>Create a Course OverView</h3>
+        <form method="POST" action="/home/show/<%= id %>" novalidate class="needs-validation">
+
+            <div class="mb-3">
+                <label for="details" class="form-label">Enter Course Details: </label>
+                <textarea name="details" placeholder="Add a bold title" type="text" class="form-control"
+                    required ></textarea>
+                <div class="valid-feedback">OverView looks Good!</div>
+                <div class="invalid-feedback">OverView not looks Good!</div>
+            </div>
+
+            <br>
+
+            <button class="btn btn-dark add-btn">ADD</button>
+
+            <br><br>
+
+        </form>
+    </div>
+</div>
+    

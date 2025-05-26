@@ -23,6 +23,11 @@ const courseListingSchema = new Schema({
 
     offers: String,
 
+    overview: {
+        type: Schema.Types.ObjectId,
+        ref: "courseDetails"
+    }
+
 });
 
 

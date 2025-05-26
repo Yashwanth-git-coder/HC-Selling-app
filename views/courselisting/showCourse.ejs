@@ -15,6 +15,13 @@
 
             <p><strong>Description</strong><br>
                 <%= Course.description %>
+                <% if (Course.overview && Course.overview.details) { %>
+                    <p>
+                        <%= Course.overview.details %>
+                    </p>
+                <% } else { %>
+                    <p><em>No overview added yet.</em></p>         
+                <% } %>
             </p>
 
             <p><strong>Starts 2nd August 2024</strong></p>
@@ -50,7 +57,7 @@
 </div>
 
 <div class="d-grid gap-2 d-md-flex justify-content-md-end showfnbtn">
-    <a href="#" class="btn btn-primary">
+    <a href="/home/show/<%= Course._id %>/overview" class="btn btn-primary">
         <button class="btn btn-primary me-md-2 showbtns" type="button">Edit Course OverView</button>
     </a>
 
