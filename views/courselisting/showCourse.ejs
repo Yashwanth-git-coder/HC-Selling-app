@@ -13,8 +13,13 @@
                 </li>
             </ul>
 
+
             <p><strong>Description</strong><br>
                 <%= Course.description %>
+            </p>
+
+                <p><strong>Starts 2nd August 2024</strong></p>
+
                 <% if (Course.overview && Course.overview.details) { %>
                     <p>
                         <%= Course.overview.details %>
@@ -22,9 +27,8 @@
                 <% } else { %>
                     <p><em>No overview added yet.</em></p>         
                 <% } %>
-            </p>
+           
 
-            <p><strong>Starts 2nd August 2024</strong></p>
 
             <!-- <div class="d-flex flex-wrap">
                 <div class="highlight-box bg-success text-white">🟢 FRONTEND</div>
