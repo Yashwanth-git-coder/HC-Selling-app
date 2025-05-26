@@ -4,6 +4,7 @@ const path = require("path");
 const ejsMate = require("ejs-mate");
 const CourseListing = require("./models/course_listing")
 const CourseDetails = require("./models/course_overview")
+const methodOverride = require("method-override");
 
 
 
@@ -15,6 +16,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.engine('ejs', ejsMate);
 app.use(express.static(path.join(__dirname, "/public")));
+app.use(methodOverride("_method"));
 
 
 //  DATA BASE Connection! -----------------------------------------
@@ -100,7 +102,7 @@ app.get("/home/show/:id/overview", async (req, res) => {
 app.post("/home/show/:id", async (req, res) => {
     try {
         const { id } = req.params;
-        const { details } = req.body;
+        const { details } = req.body.course;
 
         // Step 1: Create the overview document
         const overview = new CourseDetails({ details });
@@ -124,10 +126,38 @@ app.post("/home/show/:id", async (req, res) => {
         res.status(500).send("Something went wrong");
     }
 });
-
 // ----------------------------------------------------------------
 
 
+// (GET) Edit Page ----------------------------------------------------
+app.get("/home/show/:id/edit", async (req, res) => {
+    let {id} = req.params;
+    const courselisting = await CourseListing.findById(id).populate("overview");
+
+    if(!courselisting){
+        return res.redirect(`/home/show/${id}`);
+    }
+
+    res.render("courselisting/editCourse.ejs", { courselisting });
+});
+// -------------------------------------------------------------------
+
+
+app.put("/home/show/:id", async (req, res) => {
+    const { id } = req.params;
+    const { course, overviewDetails } = req.body;
+
+    // Update the CourseListing fields
+    const updatedCourse = await CourseListing.findByIdAndUpdate(id, course, { new: true }).populate("overview");
+
+    // If overview exists, update it
+    if (updatedCourse.overview) {
+        updatedCourse.overview.details = overviewDetails;
+        await updatedCourse.overview.save();
+    }
+
+    res.redirect(`/home/show/${id}`);
+});
 
 //  Port connection ------------------------------------------------
 app.listen(8080, () => {
