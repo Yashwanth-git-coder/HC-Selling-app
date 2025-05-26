@@ -52,59 +52,27 @@
 <hr>
 
 <div class="row row-cols-1 row-cols-md-2 g-4 course-container">
-    <div class="col">
-        <div class="card">
-            <img src="/imgs/thum2.jpg" class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional
-                    content. This content is a little bit longer.</p>
-                    <a href="#" class="btn btn-primary">Purchase Now</a>
+    <% for(let course of allCourses) { %>
+        <div class="col">
+            <div class="card">
+                <img src=<%= course.thumbnail.url %> class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <%= course.title %>
+                    </h5>
+                    <p class="card-text">
+                        <%= course.description %>
+                    </p>
+                    <a href="/home/show/<%= course._id %>" class="btn btn-primary">Purchase Now</a>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="col">
-        <div class="card">
-            <img src="/imgs/thum3.jpg" class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional
-                    content. This content is a little bit longer.</p>
-                    <a href="#" class="btn btn-primary">Purchase Now</a>
-            </div>
-        </div>
-    </div>
-    <div class="col">
-        <div class="card">
-            <img src="/imgs/thumb4.jpg" class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional
-                    content.</p>
-                    <a href="#" class="btn btn-primary">Purchase Now</a>
-            </div>
-        </div>
-    </div>
-    <div class="col">
-        <div class="card">
-            <img src="/imgs/thumb.png" class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional
-                    content. This content is a little bit longer.</p>
-                    <a href="#" class="btn btn-primary">Purchase Now</a>
-            </div>
-        </div>
-    </div>
-    <div class="col">
-        <div class="card">
-            <img src="/imgs/thumb6.jpg" class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional
-                    content. This content is a little bit longer.</p>
-                    <a href="#" class="btn btn-primary">Purchase Now</a>
-            </div>
-        </div>
-    </div>
+        <% } %>
+</div>
+
+
+<div class="d-grid gap-2 col-6 mx-auto newCoursebtn">
+    <a class="btn btn-primary" href="/home/new">
+        <button class="btn btntext" type="button">Create Course</button>
+    </a>
 </div>

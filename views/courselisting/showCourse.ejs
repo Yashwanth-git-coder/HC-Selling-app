@@ -1,0 +1,66 @@
+<% layout("/layouts/boilerplate") %>
+
+
+<div class="container py-5 show-page">
+    <div class="row showbox">
+        <!-- Left Section -->
+        <div class="col-lg-8 mb-4">
+            <h2 class="fw-bold text-primary"><%= Course.title %></h2>
+
+            <ul class="nav nav-tabs mt-4 mb-3">
+                <li class="nav-item">
+                    <a class="nav-link active" href="#">Overview</a>
+                </li>
+            </ul>
+
+            <p><strong>Description</strong><br>
+                <%= Course.description %>
+            </p>
+
+            <p><strong>Starts 2nd August 2024</strong></p>
+
+            <!-- <div class="d-flex flex-wrap">
+                <div class="highlight-box bg-success text-white">🟢 FRONTEND</div>
+                <div class="highlight-box bg-info text-white">🟢 FULLSTACK</div>
+                <div class="highlight-box bg-warning text-dark">🟢 WEB3 BASIC</div>
+            </div> -->
+        </div>
+
+        <!-- Right Section -->
+        <div class="col-lg-4">
+            <div class="cohort-card bg-white p-3">
+                <img src="<%= Course.thumbnail.url %>" alt="Cohort 3.0" class="img-fluid rounded mb-3">
+
+                <h6 class="text-muted mb-0">PRICE</h6>
+                <h4 class="fw-bold mb-1"><%= Course.price %> <del class="text-muted fs-6">₹8,499</del></h4>
+                <p class="text-success fw-semibold">29.53% off</p>
+
+                <label for="currency" class="form-label">Choose Currency:</label>
+                <select id="currency" class="form-select mb-3">
+                    <option selected>INR</option>
+                    <option>USD</option>
+                    <option>EUR</option>
+                </select>
+
+                <button class="btn btn-buy w-100 mb-2">Buy Now</button>
+                <button class="btn btn-outline-primary w-100">Pay via Crypto</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="d-grid gap-2 d-md-flex justify-content-md-end showfnbtn">
+    <a href="#" class="btn btn-primary">
+        <button class="btn btn-primary me-md-2 showbtns" type="button">Edit Course OverView</button>
+    </a>
+
+    <a href="#" class="btn btn-primary">
+        <button class="btn btn-primary showbtns" type="button">Edit Course</button>
+    </a>
+
+    <a href="#" class="btn btn-primary">
+        <button class="btn btn-primary showbtns" type="button">Delete Course</button>
+    </a>
+</div>
+
+  

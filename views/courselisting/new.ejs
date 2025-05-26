@@ -1,0 +1,51 @@
+<% layout("/layouts/boilerplate") %>
+
+    <div class="row mt-3">
+        <div class="col-8 offset-2">
+            <h3>Create a New Listing</h3>
+            <form method="POST" action="/home" novalidate class="needs-validation">
+
+                <div class="mb-3">
+                    <label for="title" class="form-label">Enter Title: </label>
+                    <input name="course[title]" placeholder="Add a bold title" type="text" class="form-control"
+                        required />
+                    <div class="valid-feedback">Title looks Good!</div>
+                    <div class="invalid-feedback">Title not looks Good!</div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="description" class="form-label">Description: </label>
+                    <textarea name="course[description]" class="form-control" required></textarea>
+                    <div class="valid-feedback">Description looks Good!</div>
+                    <div class="invalid-feedback">Description not looks Good!</div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="thumbnail" class="form-label">Upload Image: </label>
+                    <input name="course[thumbnail][url]" placeholder="Enter the URL" type="url" class="form-control" />
+                </div>
+
+                <div class="mb-3">
+                    <label for="price" class="form-label">Price: </label>
+                    <input name="course[price]" type="number" placeholder="2000" class="form-control" required>
+                    <div class="valid-feedback">Price looks Good!</div>
+                    <div class="invalid-feedback">Price not looks Good!</div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="offers" class="form-label">Offers: </label>
+                    <input name="course[offers]" placeholder="Enter offer details" type="text" class="form-control"
+                        required />
+                    <div class="valid-feedback">Offers looks Good!</div>
+                    <div class="invalid-feedback">Offers not looks Good!</div>
+                </div>
+
+                <br>
+
+                <button class="btn btn-dark add-btn">ADD</button>
+
+                <br><br>
+
+            </form>
+        </div>
+    </div>

@@ -2,6 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const path = require("path");
 const ejsMate = require("ejs-mate");
+const CourseListing = require("./models/course_listing")
 
 
 
@@ -10,6 +11,7 @@ const app = express();
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 app.engine('ejs', ejsMate);
 app.use(express.static(path.join(__dirname, "/public")));
 
@@ -32,16 +34,59 @@ async function main() {
 
 //  initial Route -------------------------------------------------
 app.get("/", (req, res) => {
-    res.send("all working good!")
+    res.redirect('/home')
 });
 // ----------------------------------------------------------------
 
-// Home Page -----------------------------------------------------
-app.get("/home", (req, res) => {
-    res.render("courselisting/index.ejs");
+
+// Home Page ------------------------------------------------------
+app.get("/home", async (req, res) => {
+    const allCourses = await CourseListing.find({});
+    res.render("courselisting/index.ejs", { allCourses });
 });
+// ----------------------------------------------------------------
 
 
+// (GET) Create Page!
+app.get("/home/new", async (req, res) => {
+    res.render("courselisting/new.ejs");
+});
+// ----------------------------------------------------------------
+
+
+// (POST) Create Page!
+app.post("/home", async (req, res) => {
+    try {
+        const newCourse = new CourseListing(req.body.course);
+        const savedCourse = await newCourse.save(); // await is needed
+        console.log(savedCourse);
+        res.redirect("/home");
+    } catch (err) {
+        console.error("Error saving course:", err);
+        res.status(500).send("Something went wrong");
+    }
+});
+// ----------------------------------------------------------------
+
+
+// (GET) Show Page!
+app.get("/home/show/:id", async (req, res) => {
+    // let { id } = req.params;
+
+    try {
+        const Course = await CourseListing.findOne({ _id: req.params.id });
+
+        if (!Course) {
+            return res.redirect("/home"); // Redirect if not found
+        }
+
+        res.render("courselisting/showCourse.ejs", { Course }); // ✅ Pass Course to the view
+    } catch (error) {
+        console.error("Error fetching course:", error);
+        res.redirect("/home");
+    }
+});
+// ----------------------------------------------------------------
 
 
 //  Port connection ------------------------------------------------
