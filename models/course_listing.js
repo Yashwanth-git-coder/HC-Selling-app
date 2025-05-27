@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
+const CourseDetails = require("./course_overview")
 
 
 const courseListingSchema = new Schema({
@@ -28,6 +29,15 @@ const courseListingSchema = new Schema({
         ref: "courseDetails"
     }
 
+});
+
+
+// Middleware: Delete related overview
+courseListingSchema.post("findOneAndDelete", async function (doc) {
+    if (doc && doc.overview) {
+        await CourseDetails.findByIdAndDelete(doc.overview);
+        console.log("Deleted associated courseDetails:", doc.overview);
+    }
 });
 
 

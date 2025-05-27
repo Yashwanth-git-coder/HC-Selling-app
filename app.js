@@ -143,6 +143,7 @@ app.get("/home/show/:id/edit", async (req, res) => {
 // -------------------------------------------------------------------
 
 
+// (PUT) Edited Page ----------------------------------------------------
 app.put("/home/show/:id", async (req, res) => {
     const { id } = req.params;
     const { course, overviewDetails } = req.body;
@@ -158,6 +159,17 @@ app.put("/home/show/:id", async (req, res) => {
 
     res.redirect(`/home/show/${id}`);
 });
+// -----------------------------------------------------------------
+
+
+// (DELETE) Edited Page ----------------------------------------------------
+app.delete("/home/show/:id", async (req, res) => {
+    let { id } = req.params;
+    let deletedListing = await CourseListing.findByIdAndDelete(id);
+    console.log(deletedListing);
+    res.redirect("/home");
+});
+
 
 //  Port connection ------------------------------------------------
 app.listen(8080, () => {

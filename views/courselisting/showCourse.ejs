@@ -69,9 +69,12 @@
         <button class="btn btn-primary showbtns" type="button">Edit Course</button>
     </a>
 
-    <a href="#" class="btn btn-primary">
-        <button class="btn btn-primary showbtns" type="button">Delete Course</button>
-    </a>
+    
+    <form method="POST" action="/home/show/<%= Course._id %>?_method=DELETE">
+        <button class="btn btn-danger showbtns" type="submit">Delete Course</button>
+    </form>
+    
+
 </div>
 
   
